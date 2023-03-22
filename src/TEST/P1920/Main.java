@@ -29,7 +29,7 @@ public class Main {
 
         /*
             Arrays.binarySearch 메서드 -> 값을 찾으면 그 값의 위치를 반환,
-            값을 찾지 못하면 만약 그 값이 있었다면 정렬 순서상 있어야되는 위치에 -1을 곱하고 1을 뺀 값을 반환한다.
+            값을 찾지 못했는데 만약 그 값이 있었다면 정렬 순서상 있어야되는 위치에 -1을 곱하고 1을 뺀 값을 반환한다.
         */
         for (int i = 0; i < m; i++) {
             int num = Integer.parseInt(st.nextToken());
