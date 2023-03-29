@@ -1,10 +1,9 @@
-package TEST.P1012;
+package WEEK0.P1012;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-        import java.util.Arrays;
-        import java.util.LinkedList;
+import java.util.LinkedList;
         import java.util.Queue;
         import java.util.StringTokenizer;
 

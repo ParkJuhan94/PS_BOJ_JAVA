@@ -1,4 +1,4 @@
-package TEST.P1000;
+package WEEK0.P1000;
 
 import java.io.*;
 import java.math.BigInteger;

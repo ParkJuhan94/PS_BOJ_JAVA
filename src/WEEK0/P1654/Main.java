@@ -1,4 +1,4 @@
-package TEST.P1654;
+package WEEK0.P1654;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

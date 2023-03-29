@@ -1,4 +1,4 @@
-package TEST.P2108;
+package WEEK0.P2108;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class Main {
     private static int middle(int[] numbers) {
         Arrays.sort(numbers);
 
-        // 짝 홀 둘 다 가능
+        // 홀일때만 나온다고 문제 조건
         return numbers[numbers.length / 2];
     }
 

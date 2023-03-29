@@ -1,4 +1,4 @@
-package TEST.P1920;
+package WEEK0.P1920;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

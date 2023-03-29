@@ -1,4 +1,4 @@
-package TEST.P88;
+package WEEK0.P88;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

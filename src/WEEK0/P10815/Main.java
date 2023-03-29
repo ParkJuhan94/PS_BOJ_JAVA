@@ -1,4 +1,4 @@
-package TEST.P10815;
+package WEEK0.P10815;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
