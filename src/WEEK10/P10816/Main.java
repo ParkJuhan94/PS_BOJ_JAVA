@@ -50,10 +50,7 @@ public class Main {
         }
         return lt;
     }
-    /*
-    arr : -10 -10 2 3 3 6 7 10 10 10
-    key : 10 9 -5 2 3 4 5 -10
-    */
+    
     //오름차순 배열에서 찾고자 하는 값 초과의 값이 처음으로 나타나는 위치
     static int upperBound(int[] arr, int key){
         int lt = 0;
