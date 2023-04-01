@@ -29,6 +29,7 @@ public class Main {
             }
             ans=Math.max(ans, cnt[i]);
         }
+
         if(six%2==0) {
             ans=Math.max(ans, six/2);
         }else {
