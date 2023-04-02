@@ -42,7 +42,7 @@ public class Main {
         while(lt < rt){
             mid = (lt + rt) / 2;
 
-            if(key <= arr[mid]){        // key 와 같을 때 상한선 내려
+            if(key <= arr[mid]){        // key==arr[mid] 일 때 상한선 내려
                 rt = mid;
             }else{
                 lt = mid + 1;
@@ -50,7 +50,7 @@ public class Main {
         }
         return lt;
     }
-    
+
     //오름차순 배열에서 찾고자 하는 값 초과의 값이 처음으로 나타나는 위치
     static int upperBound(int[] arr, int key){
         int lt = 0;
@@ -60,7 +60,7 @@ public class Main {
         while(lt < rt){
             mid = (lt + rt) / 2;
 
-            if(key < arr[mid]){     // key 와 같을 때 하한선 올려
+            if(key < arr[mid]){     // key==arr[mid] 일 때 하한선 올려
                 rt = mid;
             }else{
                 lt = mid + 1;
