@@ -26,45 +26,45 @@ public class Main {
         ch = new int[N][N];
         Queue<Point> q = new LinkedList<>();
         int cnt = 0;
+        int flag = 0;
 
         for(int i = 0; i < N; i++){
             String str = br.readLine();
             for(int j = 0; j < N; j++){
                 map[i][j] = str.charAt(j) - '0';
-                if(map[i][j] == 1){
+                if(map[i][j] == 1 && flag == 0){
                     q.add(new Point(i,j));
+                    flag++;
                 }
             }
         }
 
-        while(!q.isEmpty()){
-            Point cur = q.poll();
-            int flag = 0;
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(map[i][j] == 1){
+                    q.add(new Point(i,j));
 
-            for(int i = 0; i < 8; i++){
-                int xx = cur.x + dx[i];
-                int yy = cur.y + dy[i];
+                    while(!q.isEmpty()){
+                        Point cur = q.poll();
 
-                if(0 <= xx && xx < N && 0 <= yy && yy < N &&
-                        map[xx][yy] == 1 && ch[xx][yy] == 0){
-                    ch[xx][yy] = cnt;
-                    flag = 1;
+                        for(int k = 0; k < 8; k++){
+                            int xx = cur.x + dx[k];
+                            int yy = cur.y + dy[k];
+
+                            if(0 <= xx && xx < N && 0 <= yy && yy < N &&
+                                    map[xx][yy] == 1){
+                                map[xx][yy] = 0;
+                                q.add(new Point(xx, yy));
+                            }
+                        }
+                    }
+
+                    cnt++;
                 }
-            }
-
-            if(flag == 1){
-                cnt++;
             }
         }
 
         System.out.println(cnt);
-
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                System.out.print(ch[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
 
