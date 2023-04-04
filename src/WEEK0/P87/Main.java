@@ -1,4 +1,4 @@
-package WEEK0.P88;
+package WEEK0.P87;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ public class Main {
     static int[] dy = {0,1,0,-1,-1,1,1,-1};
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/TEST/P88/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK0/P87/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
