@@ -52,7 +52,7 @@ public class Main {
             }
             else if(order.equals("toggle"))
             {
-                bitset ^= (1 << (num - 1));
+                bitset = bitset ^ (1 << (num - 1));     //어렵다. xor
             }
             else if(order.equals("all"))
             {
