@@ -16,13 +16,13 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(br.readLine());
-        M = Integer.parseInt(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         int[][] map = new int[N][M];
         for(int i = 0; i < N; i++){
+            st = new StringTokenizer(br.readLine());
             for(int j = 0; j < M; j++){
-                st = new StringTokenizer(br.readLine());
                 map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
@@ -31,12 +31,15 @@ public class Main {
         for(int t = 0; t < T; t++){
             int ans = 0;
             st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken());
-            int j = Integer.parseInt(st.nextToken());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
-            for(){
 
+            for(int i = a; i <= x; i++){
+                for(int j = b; j <= y; j++){
+                    ans += map[i - 1][j - 1];
+                }
             }
 
             System.out.println(ans);
