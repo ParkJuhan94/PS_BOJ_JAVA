@@ -1,10 +1,9 @@
-package WEEK0;
+package WEEK0.P1026;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
     static int N;
@@ -13,7 +12,7 @@ public class Main {
         System.setIn(new FileInputStream("src/WEEK0/P/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(br.readLine());
     }
