@@ -1,4 +1,4 @@
-package WEEK0;
+package Programmers.test.P2_2;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -10,12 +10,12 @@ public class Main {
     static int N;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK0/P/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK00/P/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
+
     }
 
 }
