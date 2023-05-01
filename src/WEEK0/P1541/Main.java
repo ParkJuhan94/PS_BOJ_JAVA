@@ -11,23 +11,40 @@ import java.util.StringTokenizer;
 public class Main {
     static int N;
     static ArrayList<Integer> arr;
+    static ArrayList<Integer> arrMinus;
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("src/WEEK0/P1541/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), "-+");
+        StringTokenizer st = new StringTokenizer(br.readLine(), "-+", true);
 
         arr = new ArrayList<>();
+        arrMinus = new ArrayList<>();
+
+        int ans = 0;
+        int flag = 0;   // -할지 안할지 : 세션 0 이면 더하기, 1이면 빼기
+
         while(st.hasMoreTokens()){
-            arr.add(Integer.parseInt(st.nextToken()));
+            String cur = st.nextToken();
+
+            if(cur.equals("-")){
+                flag = 1;
+                continue;
+            }
+            if(cur.equals("+")){
+                continue;
+            }
+
+            if(flag == 0){
+                ans += Integer.parseInt(cur);
+            } else {
+                ans -= Integer.parseInt(cur);
+            }
         }
 
-//        for(int i = 0; i < arr.size(); i++){
-//            System.out.println(arr.get(i));
-//        }
 
-        
+        System.out.println(ans);
     }
 
 }
