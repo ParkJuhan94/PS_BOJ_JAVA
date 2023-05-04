@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -18,23 +20,28 @@ public class Main {
 
         //N = Integer.parseInt(st.nextToken());
 
-        int max = 0;
-        int maxIdx = -1;
-        for(int i = 0; i < 9; i++){
-            int input = Integer.parseInt(br.readLine());
-            if(input > max){
-                max = Math.max(max, input);
-                maxIdx = i;
+        String input;
+        while(!(input = br.readLine()).equals("0")){
+            int len = input.length();
+            int flag = 0;
+            for(int i = 0; i < len / 2; i++){
+                if(input.charAt(i) != input.charAt(len - i - 1)){
+                    flag = 1;
+                }
             }
+
+            if(flag == 1){
+                System.out.println("no");
+            } else {
+                System.out.println("yes");
+            }
+
+
         }
 
-        System.out.println(max);
-        System.out.println(maxIdx + 1);
+
 
 //        int ans = 0;
-//
-//
 //        System.out.println(ans);
     }
-
 }
