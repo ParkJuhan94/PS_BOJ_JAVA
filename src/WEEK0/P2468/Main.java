@@ -12,7 +12,6 @@ import java.util.StringTokenizer;
 public class Main {
     static int N;
     static int[][] map;
-    static int[][] dist;
     static boolean[][] ch;
     static int[] dr = {1, 0, -1, 0};
     static int[] dc = {0, -1, 0, 1};
@@ -36,49 +35,39 @@ public class Main {
         int ans = -1;
         int sum = 0;
 
-        for(int limit = 1; limit <= 100; limit++){
+        for(int limit = 0; limit <= 100; limit++){
             sum = 0;
             ch = new boolean[N][N];
-            dist = new int[N][N];
             Queue<Point> q = new LinkedList<>();
 
-            // 잠기는 영역 구하기
             for(int i = 0; i < N; i++){
                 for(int j = 0; j < N; j++){
-                    if(map[i][j] > limit){
+                    // 잠기는 영역 찾기
+                    if(map[i][j] > limit && !ch[i][j]){
                         q.add(new Point(i, j));
-                        dist[i][j] = 1;
+                        sum++;
+
+                        // 퍼뜨리기
+                        while(!q.isEmpty()){
+                            Point cur = q.poll();
+                            ch[cur.r][cur.c] = true;
+
+                            for(int d = 0; d < 4; d++){
+                                int nr = cur.r + dr[d];
+                                int nc = cur.c + dc[d];
+
+                                if(0 <= nr && nr < N && 0 <= nc && nc < N &&
+                                        map[nr][nc] > limit && !ch[nr][nc]){
+                                    ch[nr][nc] = true;
+                                    q.add(new Point(nr, nc));
+                                }
+                            }
+                        }
                     }
                 }
             }
-
-            int cnt = 1;
-
-            while(!q.isEmpty()){
-                Point cur = q.poll();
-                if(ch[cur.r][cur.c]){
-                    continue;
-                }
-                ch[cur.r][cur.c] = true;
-
-                for(int i = 0; i < 4; i++){
-                    int nr = cur.r + dr[i];
-                    int nc = cur.c + dc[i];
-
-                    if(0 <= nr && nr < N && 0 <= nc && nc < N &&
-                            !ch[nr][nc] && dist[nr][nc] == 1){
-                        dist[nr][nc] = dist[cur.r][cur.c];
-                    }
-                }
-            }
-
-            for(int i = 0; i < N; i++){
-                for(int j = 0; j < N; j++){
-                    ans = Math.max(ans, dist[i][j]);
-                }
-            }
+            ans = Math.max(ans, sum);
         }
-
         System.out.println(ans);
     }
 
