@@ -29,7 +29,7 @@ public class Main {
             Point s = new Point(Integer.parseInt(st.nextToken()),
                     Integer.parseInt(st.nextToken()));
 
-            // 편의점 위치 저장
+            // 위치 저장
             for(int i = 0; i < N; i++){
 
             }
