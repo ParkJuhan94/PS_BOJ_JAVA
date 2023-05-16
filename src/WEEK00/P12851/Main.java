@@ -23,10 +23,11 @@ public class Main {
 
         Queue<Integer> q = new LinkedList<>();
         int[] map = new int[100001];
-        boolean[] ch = new boolean[100001];
+        int[] ch = new int[100001];
         q.add(N);
-        ch[N] = true;
+        ch[N] = 1;
         int ans = 0;
+        int ans1 = 0;
 
         while(!q.isEmpty()){
             int cur = q.poll();
@@ -35,25 +36,31 @@ public class Main {
                 break;
             }
 
-            if(cur * 2 <= 100000 && !ch[cur * 2]){
+            if(cur * 2 == cur + 1 || cur * 2 == cur - 1){
+                ans1++;
+            }
+
+
+            if(cur * 2 <= 100000 && ch[cur * 2] == 0){
                 q.add(cur * 2);
                 map[cur * 2] = map[cur] + 1;
-                ch[cur * 2] = true;
+                ch[cur * 2] = ch[cur] + 1;
             }
 
-            if(cur - 1 >= 0 && !ch[cur - 1]){
+            if(cur - 1 >= 0 && ch[cur - 1] == 0){
                 q.add(cur - 1);
                 map[cur - 1] = map[cur] + 1;
-                ch[cur - 1] = true;
+                ch[cur - 1] = ch[cur] + 1;
             }
 
-            if(cur + 1 <= 100000 && !ch[cur + 1]){
+            if(cur + 1 <= 100000 && ch[cur + 1] == 0){
                 q.add(cur + 1);
                 map[cur + 1] = map[cur] + 1;
-                ch[cur + 1] = true;
+                ch[cur + 1] = ch[cur] + 1;
             }
         }
 
         System.out.println(ans);
+        System.out.println(ans1);
     }
 }
