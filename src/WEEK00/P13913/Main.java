@@ -1,4 +1,4 @@
-package WEEK00.P12851;
+package WEEK00.P13913;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ public class Main {
     static int K;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK00/P12851/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK00/P13913/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -47,7 +47,7 @@ public class Main {
 
             for(int i = 0; i < 3; i++){
                 int next = arr[i];
-                if(next < 0 || next > 100000){  // Index 넘어가는걸 방지하기위해서 밑의 if와 분리시키자..
+                if(next < 0 || next > 100000){
                     continue;
                 }
                 if(ch[next] == 0 || ch[next] == cur.y + 1){
