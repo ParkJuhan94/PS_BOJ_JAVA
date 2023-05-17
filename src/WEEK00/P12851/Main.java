@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -22,16 +23,16 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
 
-        Queue<Point> q = new LinkedList<>();
+        Queue<java.awt.Point> q = new LinkedList<>();
         int[] map = new int[100001];
         int[] ch = new int[100001];
-        q.add(new Point(N, 0));
+        q.add(new java.awt.Point(N, 0));
         ch[N] = 1;
         int time = 0;
         int cnt = 0;
 
         while(!q.isEmpty()){
-            Point cur = q.poll();
+            java.awt.Point cur = q.poll();
 
             if(cur.x == K){
                 if(cnt == 0){
@@ -47,12 +48,12 @@ public class Main {
 
             for(int i = 0; i < 3; i++){
                 int next = arr[i];
-                if(next < 0 || next > 100000){  // Index 넘어가는걸 방지하기위해서 밑의 if와 분리시키자..
+                if(next < 0 || next > 100000){
                     continue;
                 }
                 if(ch[next] == 0 || ch[next] == cur.y + 1){
                     ch[next] = cur.y + 1;
-                    q.add(new Point(next, cur.y + 1));
+                    q.add(new java.awt.Point(next, cur.y + 1));
                 }
             }
         }

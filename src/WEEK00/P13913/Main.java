@@ -1,17 +1,12 @@
 package WEEK00.P13913;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int N;
-    static int K;
+    static int[] visited = new int[100001]; // 방문 여부를 체크하기 위한 배열
+    static int[] parent = new int[100001]; // 이전 위치를 저장하는 배열
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("src/WEEK00/P13913/input.txt"));
@@ -19,45 +14,55 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
 
-        Queue<Point> q = new LinkedList<>();
-        int[] map = new int[100001];
-        int[] ch = new int[100001];
-        q.add(new Point(N, 0));
-        ch[N] = 1;
-        int time = 0;
-        int cnt = 0;
+        bfs(n, k);
 
-        while(!q.isEmpty()){
-            Point cur = q.poll();
+        // 경로 추적을 위한 스택
+        Stack<Integer> path = new Stack<>();
+        int current = k;
 
-            if(cur.x == K){
-                if(cnt == 0){
-                    time = cur.y;   // 가장 빠른 시간 저장
-                }
-                if(time == cur.y){  // 도착한 경로의 시간이, 가장 빠른 시간과 같다면
-                    cnt++;
-                }
-                continue;
+        while (current != n) {
+            path.push(current);
+            current = parent[current];
+        }
+
+        path.push(n);
+
+        // 최소 시간 출력
+        System.out.println(visited[k] - 1);
+
+        // 경로 출력
+        while (!path.isEmpty()) {
+            System.out.print(path.pop() + " ");
+        }
+    }
+
+    public static void bfs(int start, int end) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(start); // 시작 위치를 큐에 삽입
+        visited[start] = 1; // 시작 위치를 방문 처리
+
+        while (!q.isEmpty()) {
+            int current = q.poll(); // 현재 위치를 큐에서 추출
+
+            if (current == end) {
+                return; // 동생의 위치에 도달한 경우 종료
             }
 
-            int[] arr = {cur.x - 1, cur.x + 1, cur.x * 2};
+            // 다음 위치로 이동하는 경우의 수를 계산
+            int[] next = {current - 1, current + 1, current * 2};
 
-            for(int i = 0; i < 3; i++){
-                int next = arr[i];
-                if(next < 0 || next > 100000){
-                    continue;
-                }
-                if(ch[next] == 0 || ch[next] == cur.y + 1){
-                    ch[next] = cur.y + 1;
-                    q.add(new Point(next, cur.y + 1));
+            for (int i = 0; i < 3; i++) {
+                if (next[i] >= 0 && next[i] <= 100000) { // 범위를 벗어나지 않는 경우
+                    if (visited[next[i]] == 0) { // 방문하지 않은 위치인 경우
+                        q.offer(next[i]); // 다음 위치를 큐에 삽입
+                        visited[next[i]] = visited[current] + 1; // 최소 시간 갱신
+                        parent[next[i]] = current; // 이전 위치 저장
+                    }
                 }
             }
         }
-
-        System.out.println(time);
-        System.out.println(cnt);
     }
 }
