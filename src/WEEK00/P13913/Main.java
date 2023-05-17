@@ -45,21 +45,21 @@ public class Main {
         visited[start] = 1; // 시작 위치를 방문 처리
 
         while (!q.isEmpty()) {
-            int current = q.poll(); // 현재 위치를 큐에서 추출
+            int cur = q.poll(); // 현재 위치를 큐에서 추출
 
-            if (current == end) {
+            if (cur == end) {
                 return; // 동생의 위치에 도달한 경우 종료
             }
 
             // 다음 위치로 이동하는 경우의 수를 계산
-            int[] next = {current - 1, current + 1, current * 2};
+            int[] next = {cur - 1, cur + 1, cur * 2};
 
             for (int i = 0; i < 3; i++) {
                 if (next[i] >= 0 && next[i] <= 100000) { // 범위를 벗어나지 않는 경우
                     if (visited[next[i]] == 0) { // 방문하지 않은 위치인 경우
                         q.offer(next[i]); // 다음 위치를 큐에 삽입
-                        visited[next[i]] = visited[current] + 1; // 최소 시간 갱신
-                        parent[next[i]] = current; // 이전 위치 저장
+                        visited[next[i]] = visited[cur] + 1; // 최소 시간 갱신
+                        parent[next[i]] = cur; // 이전 위치 저장
                     }
                 }
             }
