@@ -41,7 +41,6 @@ public class Main {
                 int c = Integer.parseInt(st.nextToken());
 
                 adj[a].add(new Node(b, c));
-                //adj[b].add(new Node(a, c));   //이 문제에서는 넣으면 중복됨
             }
         }
 
@@ -56,14 +55,9 @@ public class Main {
         search(farNode, farNode, 0);
         sideNodes.add(farNode);
 
-        // 3. 두 점을 이으면 트리의 지름
-        visited = new boolean[N + 1];
-        res = search2(sideNodes.get(0), sideNodes.get(0), sideNodes.get(1), 0);
-
-        System.out.println(res);
+        System.out.println(max);
     }
 
-    // start
     static void search(int start, int cur, int sum){
         //System.out.println("cur : " + cur + ", sum : " + sum);
 
@@ -83,23 +77,6 @@ public class Main {
                 search(start, nextNode.idx, sum + nextNode.weight);
             }
         }
-    }
-
-    static int search2(int start, int cur, int target, int sum){
-        if(adj[cur].size() == 1 && cur != start && cur == target){
-            return sum;
-        }
-
-        for(int i = 0; i < adj[cur].size(); i++){
-            Node nextNode = adj[cur].get(i);
-
-            if(!visited[nextNode.idx]) {
-                visited[nextNode.idx] = true;
-                search(start, nextNode.idx, sum + nextNode.weight);
-            }
-        }
-
-        return 0;
     }
 
     static class Node {
