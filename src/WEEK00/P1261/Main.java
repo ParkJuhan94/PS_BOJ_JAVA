@@ -12,7 +12,7 @@ public class Main {
     static int M;
     static int INF = Integer.MAX_VALUE;
     static int[][] map;
-    static int[][] ch;
+    static int[][] dist;    // 해당 위치까지의 최소 벽 부수기 횟수를 저장
     static int[] dr = {0, 1, 0, -1};
     static int[] dc = {1, 0, -1, 0};
     static int ans = 0;
@@ -28,20 +28,19 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         N = Integer.parseInt(st.nextToken());
         map = new int[N][M];
-        ch = new int[N][M];
-        ans = Integer.MAX_VALUE;
+        dist = new int[N][M];
 
         for(int i = 0; i < N; i++){
             String input = br.readLine();
             for(int j = 0; j < M; j++){
                 map[i][j] = input.charAt(j) - '0';
-                ch[i][j] = INF;
+                dist[i][j] = INF;
             }
         }
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
         pq.offer(new Node(0, 0, 0));
-        ch[0][0] = 0;
+        dist[0][0] = 0;
 
         while (!pq.isEmpty()) {
             Node node = pq.poll();
@@ -54,7 +53,8 @@ public class Main {
                 break;
             }
 
-            if (count > ch[row][col]) { // 최솟값이 아니니까 넘어가
+            // 해당 루트는 최솟값이 아니니까 버려
+            if (count > dist[row][col]) {
                 continue;
             }
 
@@ -70,8 +70,8 @@ public class Main {
                 int nextCount = count + map[nx][ny];
 
                 // 최솟값보다 작을때만 갱신하고 add
-                if (nextCount < ch[nx][ny]) {
-                    ch[nx][ny] = nextCount;
+                if (nextCount < dist[nx][ny]) {
+                    dist[nx][ny] = nextCount;
                     pq.offer(new Node(nx, ny, nextCount));
                 }
             }
@@ -79,10 +79,11 @@ public class Main {
     }
 }
 
+// 미로의 특정 위치를 나타내는 역할
 class Node implements Comparable<Node> {
     int row;
     int col;
-    int count;  // 해당 노드까지 부순 벽의 갯수
+    int count;  // 해당 위치까지 도달하는 데 필요한 벽 부수기 횟수
 
     public Node(int row, int col, int count) {
         this.row = row;
