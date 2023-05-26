@@ -1,4 +1,4 @@
-package WEEK00.P11053;
+package WEEK00.P11054;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,7 +18,7 @@ public class Main {
     static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK00/P11053/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK00/P11054/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -31,7 +31,7 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        //dp[i]는 수열의 i번째 원소를 마지막으로 하는 증가하는 부분 수열의 최대 길이를 나타냄
+        //dp[i]는 수열의 i번째 원소를 마지막으로 하는 가장 긴 바이토닉 수열의 길이
         dp = new int[N];
         dp[0] = 1;
 
