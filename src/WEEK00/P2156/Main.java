@@ -39,7 +39,8 @@ public class Main {
             // 현재를 마시고 이전 안 마시고
             // 현재를 안 마시고
 
-            dp[i] = Math.max(arr[i] + arr[i - 1] + dp[i - 3], Math.max(arr[i] + dp[i - 2], dp[i - 1]));
+            dp[i] = Math.max(arr[i] + arr[i - 1] + dp[i - 3],
+                    Math.max(arr[i] + dp[i - 2], dp[i - 1]));
         }
 
         System.out.println(dp[N]);
