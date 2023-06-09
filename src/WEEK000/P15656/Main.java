@@ -1,9 +1,10 @@
-package WEEK000.P15650;
+package WEEK000.P15656;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -15,10 +16,11 @@ public class Main {
     static int[] dc = {1, 0, -1, 0};
     static int ans = 0;
     static StringBuilder sb;
-    static int[] selected; // 선택한 숫자를 저장할 배열
+    static int[] arr;
+    static int[] selected;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK000/P15650/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK000/P15656/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -26,23 +28,33 @@ public class Main {
 
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+        arr = new int[N];
         selected = new int[M];
+        ch = new int[10001];
 
-        combination(1, 0); // 1부터 시작하여 조합 생성
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(arr);
+
+        dfs(0);
+        System.out.println(sb);
     }
 
-    static void combination(int start, int count) {
-        if (count == M) { // M개의 숫자를 선택한 경우
-            for (int num : selected) {
-                System.out.print(num + " "); // 선택한 숫자 출력
+    static void dfs(int count){
+        if(count == M){
+            for(int num : selected){
+                sb.append(num + " ");
             }
-            System.out.println();
+            sb.append("\n");
             return;
         }
 
-        for (int i = start; i <= N; i++) {
-            selected[count] = i; // 현재 숫자 선택
-            combination(i + 1, count + 1); // 다음 숫자 선택
+        for(int i = 0; i < N; i++){
+            selected[count] = arr[i];
+            dfs(count + 1);
         }
     }
+
 }
