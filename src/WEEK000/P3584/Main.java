@@ -1,14 +1,11 @@
-package WEEK21.P11437;
+package WEEK000.P3584;
 
-//import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,41 +13,53 @@ public class Main {
     static int M;
     static int[] parents;
     static int[] depths;
+    static int[] rootCheck;
     static ArrayList<Integer>[] tree;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK21/P11437/input.txt"));
+        System.setIn(new FileInputStream("src/WEEK000/P3584/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        tree = new ArrayList[N+1];
-        for (int i = 1; i <= N; i++) {
-            tree[i] = new ArrayList<Integer>();
-        }
-        parents = new int[N+1];
-        depths = new int[N+1];
-        Arrays.fill(depths,-1);
+        int T = Integer.parseInt(st.nextToken());
+        for(int t = 0; t < T; t++){
+            N = Integer.parseInt(br.readLine());
+            tree = new ArrayList[N+1];
+            for (int i = 1; i <= N; i++) {
+                tree[i] = new ArrayList<Integer>();
+            }
+            parents = new int[N+1];
+            depths = new int[N+1];
+            rootCheck = new int[N+1];
+            Arrays.fill(depths,-1);
 
-        for(int i = 0; i < N - 1; i++){
-            st = new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-            tree[s].add(e);
-            tree[e].add(s);
-        }
+            for(int i = 0; i < N - 1; i++){
+                st = new StringTokenizer(br.readLine());
+                int s = Integer.parseInt(st.nextToken());
+                int e = Integer.parseInt(st.nextToken());
+                tree[s].add(e);
+                //tree[e].add(s);
 
-        // 레벨 및 부모 노드 저장
-        // 문제에서 루트는 1번 노드이니까
-        dfs(1,1,0);
+                parents[e] = s;
+                rootCheck[e] = 1;
+            }
 
-        M = Integer.parseInt(br.readLine());
-        for(int i = 0; i < M; i++){
+            // 루트 찾기
+            int root = 0;
+            for(int i = 1; i <= N; i++){
+                if(rootCheck[i] == 0){
+                    root = i;
+                    break;
+                }
+            }
+
+            // 레벨 및 부모 노드 저장
+            dfs(root,1,0);
+
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-
             System.out.println(LCA(a, b));
         }
     }
@@ -74,6 +83,7 @@ public class Main {
             a = parents[a];
             b = parents[b];
         }
+
         return a;
     }
 
