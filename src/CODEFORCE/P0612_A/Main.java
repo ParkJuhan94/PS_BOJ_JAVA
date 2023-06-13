@@ -32,28 +32,18 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st.nextToken());
 
-            if(N == 2){
+            if(N == 2 || N == 3 || N == 4){
                 System.out.println("Bob");
                 continue;
             }
-
-            ArrayList<Integer> arrList = new ArrayList<>();
-            for(int i = 0; i < N; i++){
-                arrList.add(1);
-            }
-            int cnt = 0;
-
-//            while(true){
-//                for(int i = 6; i >= 0; i--){
 //
-//                }
+//            ArrayList<Integer> arrList = new ArrayList<>();
+//            for(int i = 0; i < N; i++){
+//                arrList.add(1);
 //            }
+//            int cnt = 0;
 
-            if(cnt % 2 == 0){
-                System.out.println("Alice");
-            }else{
-                System.out.println("Bob");
-            }
+            System.out.println("Alice");
         }
 
 
