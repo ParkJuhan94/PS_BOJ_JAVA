@@ -31,7 +31,7 @@ public class Main {
             N = Integer.parseInt(br.readLine());
             selected = new int[N];
             points = new Point[N];
-            ans = Integer.MAX_VALUE;
+            ans = Long.MAX_VALUE;
 
             for(int i = 0; i < N; i++){
                 st = new StringTokenizer(br.readLine());
