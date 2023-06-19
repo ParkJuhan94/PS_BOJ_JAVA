@@ -9,7 +9,7 @@ public class Main {
     static int N;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/WEEK00/P/input.txt"));
+        System.setIn(new FileInputStream("src/BOJ.Section02/P/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
