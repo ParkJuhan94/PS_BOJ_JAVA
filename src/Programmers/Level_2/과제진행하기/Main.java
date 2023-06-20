@@ -1,5 +1,7 @@
 package Programmers.Level_2.과제진행하기;
 
+// https://school.programmers.co.kr/learn/courses/30/lessons/176962
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
@@ -51,6 +53,7 @@ class Solution {
 
         Stack<Plan> stack = new Stack<>();    // 시작한 적 없는 과제들
         Stack<Plan> stackTmp = new Stack<>(); // 중단한 과제들
+
         for(int i = 0; i < planList.size(); i++){
             stack.push(planList.get(i));
         }
@@ -64,6 +67,7 @@ class Solution {
 
             // 만약, 과제를 끝낸 시각에 새로 시작해야 되는 과제와 잠시 멈춰둔 과제가 모두 있다면,
             // 새로 시작해야 하는 과제부터 진행합니다.
+
             if(cur.start == now){
                 // 새로 시작하는 과제를 시작
                 if(stack.size() == 0){
@@ -91,22 +95,28 @@ class Solution {
                 }
             }else{
                 // 멈춰둔 과제를 시작
-                stack.push(cur);
+                stack.push(cur);    // 뺏던 걸 다시 넣어주는게 중요!!
 
-                while(!stackTmp.isEmpty())
-                {
-                    Plan curTmp = stackTmp.pop();
+                if(stackTmp.isEmpty()){
+                    // 멈춰둔 과제가 없으면 -> 시작할 과제로 넘어갈 수 있도록 현재 시간 조정
+                    now = cur.start;
+                }else{
+                    // 멈춰둔 과제가 있으면
+                    while(!stackTmp.isEmpty())
+                    {
+                        Plan curTmp = stackTmp.pop();
 
-                    if(now + curTmp.playtime <= cur.start){
-                        // 쭉
-                        now += curTmp.playtime;
-                        answer[ansIdx++] = curTmp.name;
-                    }else{
-                        // 중간에 끊길 때
-                        curTmp.playtime -= (cur.start - now);
-                        now += (cur.start - now);
-                        stackTmp.push(curTmp);
-                        break;
+                        if(now + curTmp.playtime <= cur.start){
+                            // 쭉
+                            now += curTmp.playtime;
+                            answer[ansIdx++] = curTmp.name;
+                        }else{
+                            // 중간에 끊길 때
+                            curTmp.playtime -= (cur.start - now);
+                            now += (cur.start - now);
+                            stackTmp.push(curTmp);
+                            break;
+                        }
                     }
                 }
             }
