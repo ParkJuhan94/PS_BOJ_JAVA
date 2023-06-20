@@ -1,4 +1,4 @@
-package Programmers.Level_0;
+package Programmers;
 
 class Solution{
 
