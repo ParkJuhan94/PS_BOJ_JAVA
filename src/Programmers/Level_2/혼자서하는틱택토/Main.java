@@ -16,7 +16,7 @@ class Solution {
                 map[i][j] = board[i].charAt(j);
             }
         }
-        
+
         // 1. 가로
         for(int i = 0; i < 3; i++){
             flag = 0;
