@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -13,16 +14,14 @@ public class Main {
         System.setIn(new FileInputStream("src/BOJ/Practice/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        int sum = 0;
-        String input = br.readLine();
-        for(int i = 0; i < input.length(); i++){
-            sum += input.charAt(i) - '0';
+        for(int i = 0; i < 100; i++){
+            String str = br.readLine();
+            if(str != null){
+                System.out.println(str);
+            }
         }
-
-        System.out.println(sum);
     }
 
 }
