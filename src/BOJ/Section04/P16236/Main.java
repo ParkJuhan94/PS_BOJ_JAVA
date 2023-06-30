@@ -50,9 +50,6 @@ public class Main {
     // 최대한 움직였을 때 먹은 물고기가 있는지 반환
     static boolean findFish(){
         Queue<Point> q = new LinkedList<>();
-        PriorityQueue<int[]> que = new PriorityQueue<>((o1, o2) ->
-                o1[2] != o2[2] ? Integer.compare(o1[2], o2[2]) : (o1[0] != o2[0] ? Integer.compare(o1[0], o2[0]) : Integer.compare(o1[1], o2[1]))
-        );
         q.add(new Point(shark.r, shark.c, 0));
         ch[shark.r][shark.c] = 1;
         ch = new int[N][N];
