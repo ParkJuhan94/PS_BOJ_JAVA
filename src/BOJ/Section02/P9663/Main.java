@@ -43,7 +43,7 @@ public class Main {
         if (row == N) { // 마지막 행까지 퀸을 놓은 경우
             count++; // 경우의 수를 증가시킴
         } else {
-            // 다음 행의 각 열에 퀸을 놓을 수 있는지 확인하고 재귀 호출
+            // 다음 행의 각 열에 퀸을 놓을 수 있는지 확인하고 조합 호출
             for (int i = 1; i <= N; i++) {
                 columns[row + 1] = i; // 다음 행의 i번째 열에 퀸을 놓음
                 if (isPossible(row + 1)) { // 퀸을 놓을 수 있는 경우

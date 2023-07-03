@@ -62,7 +62,7 @@ class Tree {
 
     //여기에서 root는 매개 변수로 들어온 로컬변수 root임을 주의
     public void searchNode(Node root, char data, char leftData, char rightData) {
-        if(root == null) { //도착한 노드가 null이면 재귀 종료 - 찾을(삽입할) 노드 X
+        if(root == null) { //도착한 노드가 null이면 조합 종료 - 찾을(삽입할) 노드 X
             return;
         } else if(root.data == data) { //들어갈 위치를 찾았다면
             if(leftData != '.') { //.이 아니라 값이 있는 경우에만 좌우 노드 생성
@@ -72,8 +72,8 @@ class Tree {
                 root.right = new Node(rightData);
             }
         } else { //아직 찾지못했고 탐색할 노드가 남아 있다면
-            searchNode(root.left, data, leftData, rightData); //왼쪽 재귀 탐색
-            searchNode(root.right, data, leftData, rightData); //오른쪽 재귀 탐색
+            searchNode(root.left, data, leftData, rightData); //왼쪽 조합 탐색
+            searchNode(root.right, data, leftData, rightData); //오른쪽 조합 탐색
         }
     }
 

@@ -12,28 +12,29 @@ public class Main {
     static int[][] ch, ch2;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
-    static ArrayList<Point> L;
-    static Queue<Point> boundary;
-    static Queue<Point> boundaryPossible;
-    static Queue<Point> Q;
+    static Point[] swans;
+    static Queue<Point> qWater;
+    static Queue<Point> qSwan;
+    static Queue<Point> qSwanTemp;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/MJU_ALGO.WEEK14/P3197/input.txt"));
+        System.setIn(new FileInputStream("src/MJU_ALGO/WEEK14/P3197/input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         R = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
-        L = new ArrayList<>();
-        boundary = new LinkedList<>();
-        boundaryPossible = new LinkedList<>();
-        Q = new LinkedList<>();
+        swans = new Point[2];
+        qWater = new LinkedList<>();
+        qSwan = new LinkedList<>();
+        qSwanTemp = new LinkedList<>();
         map = new char[R][C];
         ch = new int[R][C];
         ch2 = new int[R][C];
         char input;
         String inputStr;
+        int swanIdx = 0;
 
         for(int i = 0; i < R; i++){
             inputStr = br.readLine();
@@ -42,83 +43,77 @@ public class Main {
                 map[i][j] = input;
 
                 if(input == '.') {
-                    boundary.add(new Point(i, j));
+                    qWater.add(new Point(i, j));
                     ch[i][j] = 1;
                 }
-                if(input == 'L') { L.add(new Point(i, j)); }
+                if(input == 'L') { swans[swanIdx++] = new Point(i, j); }
             }
         }
 
         res = 0;
-        Q.add(new Point(L.get(0).x, L.get(0).y));
-        ch2[L.get(0).x][L.get(0).y] = 1;
+        qSwanTemp.add(new Point(swans[0].x, swans[0].y));
+        ch2[swans[0].x][swans[0].y] = 1;
 
         while(true){
-            if(isPossible(L.get(0), L.get(1))) break;
+            if(isPossible()) break;
             oneDay();
             res++;
+            printMap();
         }
         System.out.println(res);
     }
 
     // 하루 지나서 물이 얼음을 녹이는 시뮬레이션
     static void oneDay(){
-        Iterator<Point> it1 = boundary.iterator();
-        while(it1.hasNext()){
-            Point tmp = it1.next();
-            //System.out.println(tmp.x + ", " + tmp.y);
-        }
-        //System.out.println();
 
-        int size = boundary.size();
-
+        int size = qWater.size();
         for(int i = 0; i < size; i++){
-            Point front = boundary.poll();
+            Point cur = qWater.poll();
 
             for(int j = 0; j < 4; j++){
-                int xx = front.x + dx[j];
-                int yy = front.y + dy[j];
+                int xx = cur.x + dx[j];
+                int yy = cur.y + dy[j];
 
-                //System.out.println("oneday탐색 :" + xx + ", " + yy);
                 if(0 <= xx && xx < R && 0 <= yy && yy < C &&
                         map[xx][yy] == 'X' && ch[xx][yy] == 0){
                     map[xx][yy] = '.';
-                    ch[xx][yy] = 1;                     // 새로 생긴 물을 체킹
-                    boundary.add(new Point(xx, yy));    // 새로 생긴 물을 경계점에 넣어줌
+                    ch[xx][yy] = 1;                         // 새로 생긴 물을 체킹
+                    qWater.add(new Point(xx, yy));    // 새로 생긴 물을 경계점에 넣어줌
                 }
             }
         }
-        //printMap();
     }
 
     // 백조 둘이 만날 수 있는지 반환(bfs)
-    static boolean isPossible(Point L1, Point L2){
+    static boolean isPossible(){
+        qSwan = new LinkedList<>(qSwanTemp);
 
-        while(!Q.isEmpty()){
-            Point front = Q.poll();
-
-            if(front.x == L2.x && front.y == L2.y){
-                return true;
-            }
+        while(!qSwan.isEmpty()){
+            Point cur = qSwan.poll();
 
             for(int i = 0; i < 4; i++){
-                int xx = front.x + dx[i];
-                int yy = front.y + dy[i];
+                int xx = cur.x + dx[i];
+                int yy = cur.y + dy[i];
 
-                //System.out.println("ispossible탐색 :" + xx + ", " + yy);
-                // 갈 수 있냐?
                 if(0 <= xx && xx < R && 0 <= yy && yy < C
                         && ch2[xx][yy] == 0){
 
+                    if(xx == swans[1].x && yy == swans[1].y) return true;
+
                     ch2[xx][yy] = 1;
+
                     if(map[xx][yy] == 'X'){
-                        boundaryPossible.add(new Point(xx, yy));
-                        continue;
+                        //map[xx][yy] = '.';
+                        qSwanTemp.add(new Point(xx, yy));   // temp에 넣어서 보관한다.
+                        //System.out.println("qSwan 추가 :" + xx + ", " + yy);
+                    }else{
+                        qSwan.add(new Point(xx, yy));
                     }
-                    Q.add(new Point(xx, yy));
+
                 }
             }
         }
+
         return false;
     }
 

@@ -30,7 +30,7 @@ public class Main {
 
 
 /*
-재귀 : top - down
+조합 : top - down
 
 public class Main{
 

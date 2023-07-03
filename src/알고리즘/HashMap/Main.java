@@ -1,12 +1,7 @@
-package MEMO.HashMap;
+package 알고리즘.HashMap;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.StringTokenizer;
 
 public class Main {
 
